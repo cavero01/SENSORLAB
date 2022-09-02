@@ -56,9 +56,9 @@ namespace SENSORLAB.Controllers
 
         // PUT: api/ControladorClienteSensors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{idclientesensor}/{idcliente}/{idsensor}")]
+        [HttpPut()]
         [EnableQuery]
-        public async Task<IActionResult> PutClienteSensor(int idclientesensor, int idcliente, int idsensor, ClienteSensorView clienteSensorView)
+        public async Task<IActionResult> PutClienteSensor( ClienteSensorView clienteSensorView)
         {
             
             ClienteSensor clientesensor1 = new();
@@ -109,7 +109,7 @@ namespace SENSORLAB.Controllers
 
             try
             {
-                await clientesensorService.ModifyClientesensorAsync(clientesensor1);
+                await clientesensorService.AddClientesensorAsync(clientesensor1);
             }
             catch (DbUpdateException)
             {
@@ -133,10 +133,7 @@ namespace SENSORLAB.Controllers
         [EnableQuery]
         public async ValueTask<IActionResult> DeleteClienteSensor(int idclientesensor, int idcliente, int idsensor)
         {
-            if (clientesensorService.RetrieveAllClientesensors()== null)
-            {
-                return NotFound();
-            }
+            
             var clienteSensor = await clientesensorService.RetrieveClientesensorByIdAsync(idclientesensor, idcliente, idsensor);
             if (clienteSensor == null)
             {

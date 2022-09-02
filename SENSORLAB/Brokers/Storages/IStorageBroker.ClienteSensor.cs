@@ -8,6 +8,7 @@ namespace SENSORLAB.Brokers.Storages
         ValueTask<ClienteSensor> InsertClienteSensorAsync(ClienteSensor clientesensor);
         IQueryable<ClienteSensor> SelectAllClienteSensor();
         ValueTask<ClienteSensor> SelectClienteSensorByIdAsync(int clientesensorId);
+        ValueTask<ClienteSensor> SelectClienteSensorByIdAsync(int IdEvento, int IdCliente, int IdSensores);
         ValueTask<ClienteSensor> UpdateClienteSensorAsync(ClienteSensor clientesensor);
     }
 }

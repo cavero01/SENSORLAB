@@ -22,12 +22,12 @@ namespace SENSORLAB.Brokers.Storages
 
         public IQueryable<ClienteSensor> SelectAllClienteSensor() => this.ClienteSensors;
 
-        public async ValueTask<ClienteSensor> SelectClienteSensorByIdAsync(int IdEvento)
+        public async ValueTask<ClienteSensor> SelectClienteSensorByIdAsync(int IdEvento,int IdCliente,int IdSensores)
         {
             using var broker = new StorageBroker(this.configuration);
             broker.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
-            return await broker.ClienteSensors.FindAsync(IdEvento);
+            return await broker.ClienteSensors.FindAsync(IdEvento,IdCliente,IdSensores);
         }
 
         public async ValueTask<ClienteSensor> UpdateClienteSensorAsync(ClienteSensor ClienteSensor)

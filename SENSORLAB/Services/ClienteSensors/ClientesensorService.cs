@@ -40,7 +40,7 @@ namespace SENSORLAB.Services.Clientesensors
         {
             try
             {
-                return this.storageBroker.SelectClienteSensorByIdAsync(idclientesensor);
+                return this.storageBroker.SelectClienteSensorByIdAsync(idclientesensor, idcliente, idsensor);
             }
             catch (Exception)
             {
@@ -65,7 +65,7 @@ namespace SENSORLAB.Services.Clientesensors
         {
             try
             {
-                ClienteSensor maybeClientesensor = this.storageBroker.SelectClienteSensorByIdAsync(idclientesensor).Result;
+                ClienteSensor maybeClientesensor = this.storageBroker.SelectClienteSensorByIdAsync(idclientesensor, idcliente, idsensor ).Result;
 
                 return this.storageBroker.DeleteClienteSensorAsync(maybeClientesensor);
             }
