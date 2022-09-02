@@ -1,0 +1,79 @@
+﻿@page "/ClienteSensorTelerik"
+@inject Sensor3Services SensorService3
+
+<PageTitle>CLIENTESENSOR</PageTitle>
+
+ervice3
+
+<h1>CLIENTESENSOR</h1>
+
+<p>CLIENTESENSOR</p>
+
+<TelerikGrid Data="@clienteSensors"
+             EditMode="@GridEditMode.Popup"
+
+             Pageable="true"
+             Sortable="true"
+              OnCreate="@CreateHandler"
+              OnDelete="@DeleteHandler"
+              OnUpdate="@UpdateHandler"
+             
+             FilterMode="@GridFilterMode.FilterRow">
+    <GridToolBar>
+        <GridCommandButton Command="Add" Icon="add">Add Client</GridCommandButton>
+    </GridToolBar>
+    <GridColumns>
+        <GridColumn Field="idEvento" />
+        <GridColumn Field="idCliente" />
+        <GridColumn Field="idSensor" />
+        <GridColumn Field="historico" />
+        <GridColumn Field="temp" />
+        <GridColumn Field="hum" />
+        <GridColumn Field="ubi" />
+        <GridColumn Field="custom1" />
+        <GridColumn Field="custom2" />
+        <GridColumn Field="custom3" />
+        <GridCommandColumn>
+            <GridCommandButton Command="Save" Icon="save" ShowInEdit="true">Crear</GridCommandButton>
+            <GridCommandButton Command="Delete" Icon="delete">Delete</GridCommandButton>
+            <GridCommandButton Command="Cancel" Icon="cancel" ShowInEdit="true">Cancel</GridCommandButton>
+            <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
+        </GridCommandColumn>
+    </GridColumns>
+</TelerikGrid>
+
+@code {
+
+    private List<ClienteSensor> clienteSensors = new();
+
+    protected override async Task OnInitializedAsync()
+    {     
+        clienteSensors = await SensorService3. GetClienteSensorsAsync();
+        var algo = clienteSensors;
+    }
+     async Task CreateHandler(GridCommandEventArgs args)
+    {
+        ClienteSensor item = (ClienteSensor)args.Item;
+
+        await SensorService3.PostClienteSensorsAsync(item);
+
+        clienteSensors  = await SensorService3. GetClienteSensorsAsync();
+
+    }
+    async Task DeleteHandler(GridCommandEventArgs args)
+    {
+        ClienteSensor item = (ClienteSensor)args.Item;
+
+        await SensorService3.DeleteClienteSensorAsync(item.idEvento ,item.idCliente ,item.idSensor );
+        //linea para actualizar la grlla de telerik
+       clienteSensors  = await SensorService3. GetClienteSensorsAsync();
+    }
+    async Task UpdateHandler(GridCommandEventArgs args)
+    {
+        ClienteSensor item = (ClienteSensor)args.Item;
+
+        await SensorService3.UpdateClienteSensorAsync(item.idCliente,item);
+         //linea para actualizar la grlla de telerik
+       clienteSensors  = await SensorService3. GetClienteSensorsAsync();
+    }
+    }
