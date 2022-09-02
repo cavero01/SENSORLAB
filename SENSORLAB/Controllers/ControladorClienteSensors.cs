@@ -35,6 +35,7 @@ namespace SENSORLAB.Controllers
         }
 
         // GET: api/ControladorClienteSensors/5
+        //test
         [HttpGet("{idclientesensor}/{idcliente}/{idsensor}")]
         [EnableQuery]
         public async Task<ActionResult<ClienteSensor>> GetClienteSensor(int idclientesensor ,int idcliente,int idsensor)
