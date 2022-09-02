@@ -56,14 +56,11 @@ namespace SENSORLAB.Controllers
 
         // PUT: api/ControladorClienteSensors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("{idclientesensor}/{idcliente}/{idsensor}")]
         [EnableQuery]
-        public async Task<IActionResult> PutClienteSensor(int id, ClienteSensorView clienteSensorView)
+        public async Task<IActionResult> PutClienteSensor(int idclientesensor, int idcliente, int idsensor, ClienteSensorView clienteSensorView)
         {
-            if (id != clienteSensorView.IdEvento)
-            {
-                return BadRequest();
-            }
+            
             ClienteSensor clientesensor1 = new();
             clientesensor1.IdCliente = clienteSensorView.IdCliente;
             clientesensor1.IdSensor = clienteSensorView.IdSensor;
@@ -78,18 +75,11 @@ namespace SENSORLAB.Controllers
 
             try
             {
-                await clientesensorService.AddClientesensorAsync(clientesensor1);
+                await clientesensorService.ModifyClientesensorAsync(clientesensor1);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClienteSensorExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return NoContent();
