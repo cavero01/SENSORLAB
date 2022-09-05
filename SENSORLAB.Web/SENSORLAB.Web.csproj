@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="RESTFulSense" Version="2.8.0" />
+    <PackageReference Include="RESTFulSense.WebAssembly" Version="1.0.0" />
     <PackageReference Include="Telerik.UI.for.Blazor.Trial" Version="3.4.0" />
   </ItemGroup>
 
