@@ -1,5 +1,6 @@
 ﻿namespace SENSORLAB.Models
 {
+    //cliente view test
     public class ClienteView
     {
 
