@@ -57,7 +57,7 @@ namespace SENSORLAB.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [EnableQuery]
-        public async Task<IActionResult> PutCliente(int id, Cliente cliente)
+        public async ValueTask<ActionResult<Cliente>> PutCliente(int id, Cliente cliente)
         {
             if (id != cliente.IdCliente)
             {
@@ -74,7 +74,7 @@ namespace SENSORLAB.Controllers
 
             try
             {
-                await clienteService.AddClienteAsync(cliente1);
+              //await clienteService.AddClienteAsync(cliente1);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -88,7 +88,7 @@ namespace SENSORLAB.Controllers
                 }
             }
 
-            return NoContent();
+            return await clienteService.AddClienteAsync(cliente1);
         }
 
         // POST: api/ControladorCliente
@@ -131,7 +131,7 @@ namespace SENSORLAB.Controllers
         // DELETE: api/ControladorCliente/5
         [HttpDelete("{id}")]
         [EnableQuery]
-        public async ValueTask<IActionResult> DeleteCliente(int id)
+        public async ValueTask<ActionResult<Cliente>> DeleteCliente(int id)
         {
             if (clienteService.RetrieveAllClientes() == null)
             {
@@ -142,8 +142,8 @@ namespace SENSORLAB.Controllers
             {
                 return NotFound();
             }
-            Cliente clientResult= clienteService.RemoveClienteByIdAsync(id).Result;
-            return Ok(clientResult);
+            
+            return clienteService.RemoveClienteByIdAsync(id).Result;
             
         }
 

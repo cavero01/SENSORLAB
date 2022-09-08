@@ -7,9 +7,9 @@ using SENSORLAB.Web.Models;
 using RESTFulSense.Clients;
 using SENSORLAB.Web.Models.Configuration;
 
-namespace RESTFulSense                  
+namespace SENSORLAB.Web.Brokers.Apis
 {
-    public partial class ApiBroker 
+    public partial class ApiBroker : IApiBroker
     {
         private readonly IRESTFulApiFactoryClient apiClient;
         private readonly HttpClient httpClient;
