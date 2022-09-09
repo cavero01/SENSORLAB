@@ -88,7 +88,7 @@ namespace SENSORLAB.Controllers
                 }
             }
 
-            return await clienteService.AddClienteAsync(cliente1);
+            return await clienteService.ModifyClienteAsync(cliente1);
         }
 
         // POST: api/ControladorCliente
@@ -111,7 +111,7 @@ namespace SENSORLAB.Controllers
             
             try
             {
-                await clienteService.ModifyClienteAsync(cliente1);
+                await clienteService.AddClienteAsync(cliente1);
             }
             catch (DbUpdateException)
             {

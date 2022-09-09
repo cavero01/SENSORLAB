@@ -1,5 +1,7 @@
 ﻿@page "/ClienteSensorTelerik"
-@inject Sensor3Services SensorService3
+
+@inject IServiceClienteSensor serviceClienteSensor
+
 
 <PageTitle>CLIENTESENSOR</PageTitle>
 
@@ -47,33 +49,33 @@ ervice3
     private List<ClienteSensor> clienteSensors = new();
 
     protected override async Task OnInitializedAsync()
-    {     
-        clienteSensors = await SensorService3. GetClienteSensorsAsync();
-        var algo = clienteSensors;
+    {
+        clienteSensors = await serviceClienteSensor.RetrieveAllClienteSensorAsync();
+       
     }
      async Task CreateHandler(GridCommandEventArgs args)
     {
-        ClienteSensor item = (ClienteSensor)args.Item;
+        ClienteSensor newclienteSensor = (ClienteSensor)args.Item;
 
-        await SensorService3.PostClienteSensorsAsync(item);
+        await serviceClienteSensor.AddClienteSensorAsync(newclienteSensor);
 
-        clienteSensors  = await SensorService3. GetClienteSensorsAsync();
+        clienteSensors = await serviceClienteSensor.RetrieveAllClienteSensorAsync();
 
     }
     async Task DeleteHandler(GridCommandEventArgs args)
     {
-        ClienteSensor item = (ClienteSensor)args.Item;
+        ClienteSensor dropclienteSensor = (ClienteSensor)args.Item;
 
-        await SensorService3.DeleteClienteSensorAsync(item.idEvento ,item.idCliente ,item.idSensor );
+        await serviceClienteSensor.RemoveClienteSensorAsync(dropclienteSensor.idEvento ,dropclienteSensor.idCliente ,dropclienteSensor.idSensor );
         //linea para actualizar la grlla de telerik
-       clienteSensors  = await SensorService3. GetClienteSensorsAsync();
+      clienteSensors = await serviceClienteSensor.RetrieveAllClienteSensorAsync();
     }
     async Task UpdateHandler(GridCommandEventArgs args)
     {
-        ClienteSensor item = (ClienteSensor)args.Item;
+        ClienteSensor updateclienteSensor = (ClienteSensor)args.Item;
 
-        await SensorService3.UpdateClienteSensorAsync(item.idCliente,item);
+        await serviceClienteSensor.ModifyClienteSensorAsync(updateclienteSensor.idCliente,updateclienteSensor);
          //linea para actualizar la grlla de telerik
-       clienteSensors  = await SensorService3. GetClienteSensorsAsync();
+       clienteSensors = await serviceClienteSensor.RetrieveAllClienteSensorAsync();
     }
     }

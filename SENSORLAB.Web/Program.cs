@@ -4,6 +4,7 @@ using SENSORLAB.Web.Brokers.Apis;
 using SENSORLAB.Web.Data;
 using SENSORLAB.Web.Services.Clientes;
 using SENSORLAB.Web.Services.Sensors;
+using SENSORLAB.Web.Services.ClienteSensors;
 
 var builder = WebApplication.CreateBuilder(args);
 //var provider = builder.Services.BuildServiceProvider();
@@ -19,11 +20,12 @@ builder.Services.AddServerSideBlazor();
 //});
 builder.Services.AddScoped<IApiBroker, ApiBroker>();
 builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddSingleton<Sensor1Services>();
-builder.Services.AddSingleton<Sensor2Services>();
-builder.Services.AddSingleton<Sensor3Services>();
+//builder.Services.AddSingleton<Sensor1Services>();
+//builder.Services.AddSingleton<Sensor2Services>();
+//builder.Services.AddSingleton<Sensor3Services>();
 builder.Services.AddScoped<IServiceCliente, ServiceCliente>();
 builder.Services.AddScoped<IServiceSensor, ServiceSensor>();
+builder.Services.AddScoped<IServiceClienteSensor, ServiceClienteSensor > ();  
 
 builder.Services.AddHttpClient();
 builder.Services.AddTelerikBlazor();
