@@ -1,8 +1,6 @@
 ﻿@page "/sensorTelerik"
-
+@inject IServiceSensor serviceSensor
 <PageTitle>SENSOR</PageTitle>
-
-@inject Sensor2Services SensorService2
 
 <h1>SENSORES</h1>
 
@@ -14,8 +12,8 @@
              Pageable="true"
              Sortable="true"
              OnCreate="@CreateHandler"
-             OnDelete="@DeleteHandler"
-             OnUpdate="@UpdateHandler" 
+             OnDelete="@RemoveHandler"
+             OnUpdate="@ModifyHandler" 
              
              FilterMode="@GridFilterMode.FilterRow">
     <GridToolBar>
@@ -35,36 +33,38 @@
 
 @code {
     
-    private List<Sensor> sensors = new();
+   private List<Sensor> sensors = new();
 
     protected override async Task OnInitializedAsync()
-    {     
-        sensors  = await SensorService2. GetSensorAsync();
+    {
+        sensors = await serviceSensor.RetrieveAllSensorAsync();
+        //clientes = await SensorService. GetClienteAsync();
     }
-
     async Task CreateHandler(GridCommandEventArgs args)
     {
-        Sensor item = (Sensor)args.Item;
+        Sensor newSensor = (Sensor)args.Item;
 
-        await SensorService2.PostSensorAsync(item);
+        await serviceSensor.AddSensorAsync(newSensor);
 
-        sensors  = await SensorService2. GetSensorAsync();
+
+        sensors = await serviceSensor.RetrieveAllSensorAsync();
+
 
     }
-    async Task DeleteHandler(GridCommandEventArgs args)
+    async Task RemoveHandler(GridCommandEventArgs args)
     {
-        Sensor item = (Sensor)args.Item;
+        Sensor dropSensor = (Sensor)args.Item;
 
-        await SensorService2.DeleteSensorAsync(item.idSensor);
+        await serviceSensor.RemoveSensorAsync(dropSensor.idSensor);
         //linea para actualizar la grlla de telerik
-       sensors  = await SensorService2. GetSensorAsync();
+      sensors = await serviceSensor.RetrieveAllSensorAsync();
     }
-     async Task UpdateHandler(GridCommandEventArgs args)
+     async Task ModifyHandler(GridCommandEventArgs args)
     {
-        Sensor item = (Sensor)args.Item;
+        Sensor updateSensor = (Sensor)args.Item;
 
-        await SensorService2.UpdateSensorAsync(item.idSensor,item);
+        await serviceSensor.ModifySensorAsync(updateSensor.idSensor,updateSensor);
          //linea para actualizar la grlla de telerik
-       sensors  = await SensorService2. GetSensorAsync();
+       sensors = await serviceSensor.RetrieveAllSensorAsync();
     }
 }

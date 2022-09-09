@@ -6,8 +6,8 @@ using System.Text.Json;
 
 namespace SENSORLAB.Web.Data
 {
-    public class Sensor1Services
-    {
+  public class Sensor1Services
+   {
         //    private readonly IHttpClientFactory _httpClientFactory;
 
         //    //public Sensor1Services(IHttpClientFactory httpClientFactory)

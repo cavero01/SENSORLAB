@@ -59,7 +59,7 @@ namespace SENSORLAB.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [EnableQuery]
-        public async Task<IActionResult> PutSensor(int id, Sensor sensor)
+        public async ValueTask<ActionResult<Sensor>> PutSensor(int id, Sensor sensor)
         {
             if (id != sensor.IdSensor)
             {
@@ -69,11 +69,11 @@ namespace SENSORLAB.Controllers
             Sensor sensor1 = new();
             sensor1.IdSensor = sensor.IdSensor;
             sensor1.Fabricante = sensor.Fabricante;
-            
+
 
             try
             {
-                await sensorService.AddSensorAsync(sensor1);
+                //await clienteService.AddClienteAsync(cliente1);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -87,7 +87,7 @@ namespace SENSORLAB.Controllers
                 }
             }
 
-            return NoContent();
+            return await sensorService.AddSensorAsync(sensor1);
         }
 
         // POST: api/ControladorSensor
@@ -126,9 +126,9 @@ namespace SENSORLAB.Controllers
         // DELETE: api/ControladorSensor/5
         [HttpDelete("{id}")]
         [EnableQuery]
-        public async Task<IActionResult> DeleteSensor(int id)
+        public async ValueTask<ActionResult<Sensor>> DeleteSensor(int id)
         {
-            if (sensorService.RetrieveAllSensor == null)
+            if (sensorService.RetrieveAllSensor() == null)
             {
                 return NotFound();
             }
@@ -137,8 +137,9 @@ namespace SENSORLAB.Controllers
             {
                 return NotFound();
             }
-            Sensor sensorResult = sensorService.RemoveSensorByIdAsync(id).Result;
-            return Ok(sensorResult);
+
+            return sensorService.RemoveSensorByIdAsync(id).Result;
+
         }
 
         private bool SensorExists(int id)

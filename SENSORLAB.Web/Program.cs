@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using SENSORLAB.Web.Brokers.Apis;
 using SENSORLAB.Web.Data;
 using SENSORLAB.Web.Services.Clientes;
+using SENSORLAB.Web.Services.Sensors;
 
 var builder = WebApplication.CreateBuilder(args);
 //var provider = builder.Services.BuildServiceProvider();
@@ -22,6 +23,8 @@ builder.Services.AddSingleton<Sensor1Services>();
 builder.Services.AddSingleton<Sensor2Services>();
 builder.Services.AddSingleton<Sensor3Services>();
 builder.Services.AddScoped<IServiceCliente, ServiceCliente>();
+builder.Services.AddScoped<IServiceSensor, ServiceSensor>();
+
 builder.Services.AddHttpClient();
 builder.Services.AddTelerikBlazor();
 
