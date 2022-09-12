@@ -13,6 +13,8 @@ namespace SENSORLAB.Web.Models
         public string nombre { get; set; }
         public DateTime fecha { get; set; }
         public string nacionalidad { get; set; }
+
+        [Range(1, 5)]
         public int premium { get; set; }
    
     }
