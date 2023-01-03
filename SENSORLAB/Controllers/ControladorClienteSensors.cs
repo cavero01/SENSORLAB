@@ -54,11 +54,13 @@ namespace SENSORLAB.Controllers
             return clienteSensor;
         }
 
+       
+
         // PUT: api/ControladorClienteSensors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut()]
         [EnableQuery]
-        public async Task<IActionResult> PutClienteSensor( ClienteSensorView clienteSensorView)
+        public async ValueTask<ActionResult<ClienteSensor>> PutClienteSensor( ClienteSensorView clienteSensorView)
         {
             
             ClienteSensor clientesensor1 = new();
@@ -75,14 +77,14 @@ namespace SENSORLAB.Controllers
 
             try
             {
-                await clientesensorService.ModifyClientesensorAsync(clientesensor1);
+                //await clienteService.AddClienteAsync(cliente1);
             }
             catch (DbUpdateConcurrencyException)
             {
-                
+              
             }
 
-            return NoContent();
+            return await clientesensorService.ModifyClientesensorAsync(clientesensor1);
         }
 
         // POST: api/ControladorClienteSensors
@@ -131,17 +133,20 @@ namespace SENSORLAB.Controllers
         // DELETE: api/ControladorClienteSensors/5
         [HttpDelete("{idclientesensor}/{idcliente}/{idsensor}")]
         [EnableQuery]
-        public async ValueTask<IActionResult> DeleteClienteSensor(int idclientesensor, int idcliente, int idsensor)
+        public async ValueTask<ActionResult<ClienteSensor>> DeleteClienteSensor(int idclientesensor, int idcliente, int idsensor)
         {
-            
+            if (clientesensorService.RetrieveAllClientesensors() == null)
+            {
+                return NotFound();
+            }
             var clienteSensor = await clientesensorService.RetrieveClientesensorByIdAsync(idclientesensor, idcliente, idsensor);
             if (clienteSensor == null)
             {
                 return NotFound();
             }
 
-            ClienteSensor clientesensorresult= clientesensorService.RemoveClientesensorByIdAsync (idclientesensor, idcliente, idsensor).Result;
-            return Ok(clientesensorresult);
+            
+            return clientesensorService.RemoveClientesensorByIdAsync(idclientesensor, idcliente, idsensor).Result;
         }
 
         private bool ClienteSensorExists(int id)
