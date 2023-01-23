@@ -72,7 +72,7 @@
     {
         ClienteSensor updateclienteSensor = (ClienteSensor)args.Item;
 
-        await serviceClienteSensor.ModifyClienteSensorAsync(updateclienteSensor.idCliente,updateclienteSensor);
+        await serviceClienteSensor.ModifyClienteSensorAsync(updateclienteSensor.idEvento,updateclienteSensor);
          //linea para actualizar la grlla de telerik
        clienteSensors = await serviceClienteSensor.RetrieveAllClienteSensorAsync();
     }

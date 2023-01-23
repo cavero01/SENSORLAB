@@ -2,7 +2,7 @@
 {
     public class ClienteSensorView
     {        
-        public int IdEvento { get; set; }        
+        public Guid IdEvento { get; set; }        
         public int IdCliente { get; set; }        
         public int IdSensor { get; set; }
         public DateTime? Historico { get; set; }

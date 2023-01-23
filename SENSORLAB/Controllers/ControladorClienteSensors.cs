@@ -38,7 +38,7 @@ namespace SENSORLAB.Controllers
         //test
         [HttpGet("{idclientesensor}/{idcliente}/{idsensor}")]
         [EnableQuery]
-        public async Task<ActionResult<ClienteSensor>> GetClienteSensor(int idclientesensor ,int idcliente,int idsensor)
+        public async Task<ActionResult<ClienteSensor>> GetClienteSensor(Guid idclientesensor ,int idcliente,int idsensor)
         {
           if (clientesensorService.RetrieveAllClientesensors() == null)
           {
@@ -100,7 +100,7 @@ namespace SENSORLAB.Controllers
             ClienteSensor clientesensor1 = new();
             clientesensor1.IdCliente = clienteSensorView.IdCliente;
             clientesensor1.IdSensor = clienteSensorView.IdSensor;
-            clientesensor1.IdEvento = clienteSensorView.IdEvento;
+            clientesensor1.IdEvento = Guid.NewGuid();
             clientesensor1.Historico = clienteSensorView.Historico;
             clientesensor1.Temp = clienteSensorView.Temp;
             clientesensor1.Hum = clienteSensorView.Hum;
@@ -115,14 +115,7 @@ namespace SENSORLAB.Controllers
             }
             catch (DbUpdateException)
             {
-                if (ClienteSensorExists(clienteSensorView.IdEvento))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return new ActionResult<ClienteSensor>(clientesensor1);
@@ -133,7 +126,7 @@ namespace SENSORLAB.Controllers
         // DELETE: api/ControladorClienteSensors/5
         [HttpDelete("{idclientesensor}/{idcliente}/{idsensor}")]
         [EnableQuery]
-        public async ValueTask<ActionResult<ClienteSensor>> DeleteClienteSensor(int idclientesensor, int idcliente, int idsensor)
+        public async ValueTask<ActionResult<ClienteSensor>> DeleteClienteSensor(Guid idclientesensor, int idcliente, int idsensor)
         {
             if (clientesensorService.RetrieveAllClientesensors() == null)
             {

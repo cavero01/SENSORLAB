@@ -22,12 +22,12 @@ namespace SENSORLAB.Web.Services.ClienteSensors
             return await this.apiBroker.PostClienteSensorAsync(clientesensor);
         }
 
-        public async ValueTask<ClienteSensor> RemoveClienteSensorAsync(int idEvento, int idCliente, int idSensor)
+        public async ValueTask<ClienteSensor> RemoveClienteSensorAsync(Guid idEvento, int idCliente, int idSensor)
         {
             return await this.apiBroker.DeleteClienteSensorAsync(idEvento, idCliente, idSensor);
         }
 
-        public async ValueTask<ClienteSensor> ModifyClienteSensorAsync(int idEvento, ClienteSensor clientesensor)
+        public async ValueTask<ClienteSensor> ModifyClienteSensorAsync(Guid idEvento, ClienteSensor clientesensor)
         {
             return await this.apiBroker.UpdateClienteSensorAsync(idEvento, clientesensor);
         }

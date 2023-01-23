@@ -16,10 +16,10 @@ namespace SENSORLAB.Web.Brokers.Apis
             public async ValueTask<ClienteSensor> PostClienteSensorAsync(ClienteSensor clientesensor) =>
                 await this.PostAsync(ClienteSensorRelativeUrl, clientesensor);
 
-            public async ValueTask<ClienteSensor> DeleteClienteSensorAsync(int idClienteSensor, int idCliente, int idSensor) =>
+            public async ValueTask<ClienteSensor> DeleteClienteSensorAsync(Guid idClienteSensor, int idCliente, int idSensor) =>
                 await this.DeleteAsync<ClienteSensor>(ClienteSensorRelativeUrl + "/" + idClienteSensor + "/" + idCliente + "/" + idSensor);
 
-            public async ValueTask<ClienteSensor> UpdateClienteSensorAsync(int idClienteSensor, ClienteSensor clientesensor) =>
+            public async ValueTask<ClienteSensor> UpdateClienteSensorAsync(Guid idClienteSensor, ClienteSensor clientesensor) =>
                 await this.PutAsync(ClienteSensorRelativeUrl + "/" + idClienteSensor, clientesensor);
         }
 

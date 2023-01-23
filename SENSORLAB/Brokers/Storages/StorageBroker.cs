@@ -11,15 +11,6 @@ namespace SENSORLAB.Brokers.Storages
         {
             this.configuration = configuration;
         }
-
-        public ValueTask<ClienteSensor> SelectClienteSensorByIdAsync(int clientesensorId)
-        {
-            throw new NotImplementedException();
-        }
-
-        //public virtual DbSet<ClienteSensor> ClienteSensors { get; set; } = null!;
-        //public virtual DbSet<Sensor> Sensors { get; set; } = null!;
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
