@@ -8,7 +8,7 @@ namespace SENSORLAB.Web.Models
     public partial class ClienteSensor
     {
       
-        public int idEvento { get; set; }
+        public Guid idEvento { get; set; }
        
         public int idCliente { get; set; }
         

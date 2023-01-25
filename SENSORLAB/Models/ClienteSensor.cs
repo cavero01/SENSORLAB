@@ -9,7 +9,7 @@ namespace SENSORLAB.Models
     public partial class ClienteSensor
     {
         [Key]
-        public int IdEvento { get; set; }
+        public Guid IdEvento { get; set; }
         [Key]
         public int IdCliente { get; set; }
         [Key]

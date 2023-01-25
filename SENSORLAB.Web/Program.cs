@@ -20,9 +20,6 @@ builder.Services.AddServerSideBlazor();
 //});
 builder.Services.AddScoped<IApiBroker, ApiBroker>();
 builder.Services.AddSingleton<WeatherForecastService>();
-//builder.Services.AddSingleton<Sensor1Services>();
-//builder.Services.AddSingleton<Sensor2Services>();
-//builder.Services.AddSingleton<Sensor3Services>();
 builder.Services.AddScoped<IServiceCliente, ServiceCliente>();
 builder.Services.AddScoped<IServiceSensor, ServiceSensor>();
 builder.Services.AddScoped<IServiceClienteSensor, ServiceClienteSensor > ();  
@@ -32,11 +29,9 @@ builder.Services.AddTelerikBlazor();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

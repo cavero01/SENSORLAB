@@ -5,8 +5,8 @@ namespace SENSORLAB.Services.Clientesensors
     {
         ValueTask<ClienteSensor> AddClientesensorAsync(ClienteSensor clienteSensor);    
         ValueTask<ClienteSensor> ModifyClientesensorAsync(ClienteSensor clienteSensor);
-        ValueTask<ClienteSensor> RemoveClientesensorByIdAsync(int idclientesensor, int idcliente, int idsensor);
+        ValueTask<ClienteSensor> RemoveClientesensorByIdAsync(Guid idclientesensor, int idcliente, int idsensor);
         IQueryable<ClienteSensor> RetrieveAllClientesensors();
-        ValueTask<ClienteSensor> RetrieveClientesensorByIdAsync(int idclientesensor, int idcliente, int idsensor);
+        ValueTask<ClienteSensor> RetrieveClientesensorByIdAsync(Guid idclientesensor, int idcliente, int idsensor);
     }
 }

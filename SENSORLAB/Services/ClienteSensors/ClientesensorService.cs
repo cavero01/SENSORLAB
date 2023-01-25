@@ -36,7 +36,7 @@ namespace SENSORLAB.Services.Clientesensors
             }
         }
 
-        public ValueTask<ClienteSensor> RetrieveClientesensorByIdAsync(int idclientesensor, int idcliente, int idsensor)
+        public ValueTask<ClienteSensor> RetrieveClientesensorByIdAsync(Guid idclientesensor, int idcliente, int idsensor)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace SENSORLAB.Services.Clientesensors
             }
         }
 
-        public ValueTask<ClienteSensor> RemoveClientesensorByIdAsync(int idclientesensor, int idcliente, int idsensor)
+        public ValueTask<ClienteSensor> RemoveClientesensorByIdAsync(Guid idclientesensor, int idcliente, int idsensor)
         {
             try
             {
